@@ -1,24 +1,27 @@
 var React = require('react');
 
-var App = React.createClass({
-    getInitialState: function() {
-        return {
-            count: this.props.initialCount
-        };
-    },
+class App extends React.Component{
+  constructor(props) {
+    super(props)
+    this.state = {
+      count: this.props.initialCount
+    }
 
-    _increment: function() {
+    this.increment = this.increment.bind(this);
+  }
+
+    increment () {
         this.setState({ count: this.state.count + 1 });
-    },
+    }
 
-    render: function() {
+    render() {
         return (
             <div>
                 <span>the count is: </span>
-                <span onClick={this._increment}>{this.state.count}</span>
+                <span onClick={this.increment}>{this.state.count}</span>
             </div>
         )
     }
-})
+}
 
 module.exports = App;

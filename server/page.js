@@ -8,9 +8,7 @@ var ReactDOM = require('react-dom');
 
 module.exports = function(props) {
 
-    var content = ReactDOMServer.renderToString(
-        <App initialCount={props.initialCount}></App>
-    );
+    var content = ReactDOMServer.renderToString(<App initialCount={props.initialCount}></App>);
 
     var propsScript = 'var APP_PROPS = ' + JSON.stringify(props);
 
