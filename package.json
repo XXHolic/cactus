@@ -1,0 +1,28 @@
+{
+  "name": "cactus",
+  "version": "1.0.0",
+  "description": "isomorphism render",
+  "main": "index.js",
+  "dependencies": {
+    "babel-loader": "^8.0.6",
+    "express": "^4.17.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "webpack": "^4.41.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "webpack && node server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XXHolic/cactus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XXHolic/cactus/issues"
+  },
+  "homepage": "https://github.com/XXHolic/cactus#readme"
+}
