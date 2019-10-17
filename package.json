@@ -4,8 +4,11 @@
   "description": "isomorphism render",
   "dependencies": {
     "dva": "^2.6.0-beta.14",
+    "express-dva-ssr": "^1.0.1",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "react-helmet": "^5.2.1",
+    "react-router-config": "^1.0.0-beta.4"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
@@ -26,7 +29,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --env.NODE_ENV=development --config webpack.client.js",
-    "server": "node ./server/index.js",
+    "server": "cp ./server2/index.html.dev ./server/index.html && node ./server2/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

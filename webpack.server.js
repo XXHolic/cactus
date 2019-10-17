@@ -6,10 +6,12 @@ var serverPath = path.join(__dirname,"server-dist");
 module.exports = [
     {
       target: 'node',
-        entry: './server/index.js',
-        output: {
-            path: serverPath,
-        },
+        entry: './server2/index.js',
+        // output: {
+        //     path: serverPath,
+        //     filename: 'bundle.js',
+        // },
+        publicPath: "/static/",
         externals: [nodeExternals()],
         mode: 'development',
         module: {
