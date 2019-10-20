@@ -1,19 +1,20 @@
 var path = require('path');
+const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
+const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 
 var serverPath = path.join(__dirname,"server-dist");
 
-module.exports = [
-    {
-      target: 'node',
-        entry: './server2/index.js',
-        // output: {
-        //     path: serverPath,
-        //     filename: 'bundle.js',
-        // },
-        publicPath: "/static/",
+module.exports = env =>{
+    return {
+        entry: './server/index.js',
+        output: {
+            publicPath: '/',
+            path: serverPath,
+            filename: 'bundle.js',
+        },
         externals: [nodeExternals()],
-        mode: 'development',
+        mode: env.NODE_ENV,
         module: {
           rules: [
             {
@@ -22,11 +23,15 @@ module.exports = [
               use: {
                 loader: 'babel-loader',
                 options: {
-                  presets: [["@babel/preset-env"], ["@babel/preset-react"]]
+                  presets: [["@babel/preset-env"], ["@babel/preset-react"]],
+                  plugins: ["@babel/plugin-transform-runtime"]
                 }
               }
             }
           ]
-        }
+        },
+        plugins: [
+          new CleanWebpackPlugin()
+        ]
     }
-]
+  }

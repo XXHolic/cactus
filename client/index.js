@@ -5,7 +5,7 @@ const history = createBrowserHistory();
 // 1. Initialize
 const app = dva({
   history: history,
-  initialState: { products: [{ name: "dva", id: 1 }, { name: "antd", id: 2 }] }
+  // initialState: { products: [{ name: "dva", id: 1 }, { name: "antd", id: 2 }] }
 });
 
 // 2. Plugins

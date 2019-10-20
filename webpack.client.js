@@ -1,4 +1,5 @@
 var path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 
@@ -9,7 +10,10 @@ module.exports = env => {
         entry: './client/index.js',
         output: {
             path: assetsPath,
+            publicPath: '/',
+            filename: 'index.js',
         },
+        mode: env.NODE_ENV,
         module: {
           rules: [
             {
@@ -18,7 +22,8 @@ module.exports = env => {
               use: {
                 loader: 'babel-loader',
                 options: {
-                  presets: [["@babel/preset-env"], ["@babel/preset-react"]]
+                  presets: [["@babel/preset-env"], ["@babel/preset-react"]],
+                  plugins: ["@babel/plugin-transform-runtime"]
                 }
               }
             }

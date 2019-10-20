@@ -3,16 +3,23 @@
   "version": "1.0.0",
   "description": "isomorphism render",
   "dependencies": {
+    "@babel/polyfill": "^7.6.0",
+    "@babel/runtime": "^7.6.3",
     "dva": "^2.6.0-beta.14",
     "express-dva-ssr": "^1.0.1",
+    "history": "^4.10.1",
+    "lodash.assign": "^4.2.0",
+    "lodash.merge": "^4.6.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
-    "react-router-config": "^1.0.0-beta.4"
+    "react-router": "^5.1.2",
+    "uid": "0.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.6.2",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
     "@babel/register": "^7.6.2",
@@ -29,7 +36,9 @@
   },
   "scripts": {
     "start": "webpack-dev-server --env.NODE_ENV=development --config webpack.client.js",
-    "server": "cp ./server2/index.html.dev ./server/index.html && node ./server2/index.js",
+    "build": "webpack --env.NODE_ENV=production --config webpack.client.js",
+    "server": "node --inspect ./server/index.js",
+    "server:build": "webpack --env.NODE_ENV=production --config webpack.server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

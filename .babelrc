@@ -2,8 +2,10 @@
   "presets": [
     ["@babel/preset-env", {
       "targets": {
-        "node": "current"
+        // "node": "current",
+        "browsers": ["last 3 Chrome versions"]
       }
     }],["@babel/preset-react"]
-  ]
+  ],
+  "plugins": ["@babel/plugin-transform-runtime"]
 }

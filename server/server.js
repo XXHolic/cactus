@@ -1,76 +1,36 @@
+import path from 'path';
 import express from 'express';
 import webpack from 'webpack';
 import config from '../webpack.server.js';
-import { matchRoutes } from 'react-router-config'
-import {routes} from './serverRoute';
-import { render } from './serverRender';
+import { routes } from './serverRoute';
+import models from './ssrModel';
+import renderFullPage from './renderFullPage';
+import runtimeSSRMiddle from './runtimeSSRMiddle';
 
 const app = express();
 
-if (process.env.NODE_ENV !== 'production') {
-  // webpack compile
-  const compiler = webpack(config);
-  const options = {
-    // publicPath: config.output.publicPath,
-    noInfo: true,
-    stats: {colors: true},
-  };
-  app.use(require('webpack-dev-middleware')(compiler, options));
-  app.use(require('webpack-hot-middleware')(compiler));
+// if (process.env.NODE_ENV !== 'production') {
+//   // webpack compile
+//   const compiler = webpack(config);
+//   const options = {
+//     publicPath: config.output.publicPath,
+//     noInfo: true,
+//     stats: {colors: true},
+//   };
+//   app.use(require('webpack-dev-middleware')(compiler, options));
+//   app.use(require('webpack-hot-middleware')(compiler));
 
-}
+// }
+// app.use(require('./runtimeSSRMiddle'));
 
-// app.use(require('./serverRoute.js'));
+app.use('/server-dist', express.static(path.join(__dirname, '../server-dist')));
 
 app.get('*', function (req, res) {
-	// const store = getStore(req);
-	const store = {};
-	// 根据路由的路径，来往store里面加数据
-    console.log('req.path',req.path);
-    const matchedRoutes = matchRoutes(routes, req.path);
-    // console.log('matchedRoutes',matchedRoutes);
-	// 让matchRoutes里面所有的组件，对应的loadData方法执行一次
-    let promises = [];
-    let headerObj = [];
-    var compon = null;
 
-	// matchedRoutes.forEach(item => {
-	// 	if (item.route.loadData) {
-    //         headerObj = item.route.header;
-    //         compon = item.route.component;
-	// 		// const promise = new Promise((resolve, reject) => {
-	// 		// 	item.route.loadData(store).then(resolve).catch(resolve);
-	// 		// })
-	// 		// promises.push(promise);
-    //     }
-    //     console.log('key:',item.route.key);
-    // });
+ let func = runtimeSSRMiddle({routes, renderFullPage,models})(req,res,()=>{});
+//  func(req);
 
 
-    // if (compon) {
-        const context = {css: []};
-        const html = render(store, compon, req, context,headerObj);
-        res.send(html);
-    // } else {
-        // res.send('');
-    // }
-
-
-
-	// Promise.all(promises).then(() => {
-	// 	const context = {css: []};
-    //     const html = render(store, routes, req, context,headerObj);
-    //     res.send(html);
-
-		// if (context.action === 'REPLACE') {
-		// 	res.redirect(301, context.url)
-		// }else if (context.NOT_FOUND) {
-		// 	res.status(404);
-		// 	res.send(html);
-		// }else {
-		// 	res.send(html);
-		// }
-    // })
 //     res.end(`
 //     <!DOCTYPE html>
 //     <html>
@@ -83,6 +43,11 @@ app.get('*', function (req, res) {
 //     </html>
 //   `)
     // app.use(require('./serverRender'));
+});
+
+app.use((error, req, res) => {
+  res.status(500);
+  res.render('error', { error });
 });
 
 
