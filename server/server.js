@@ -23,7 +23,8 @@ const app = express();
 // }
 // app.use(require('./runtimeSSRMiddle'));
 
-app.use('/server-dist', express.static(path.join(__dirname, '../server-dist')));
+// app.use('server-dist', express.static(path.join(__dirname, '../server-dist')));
+app.use(express.static('client-dist'));
 
 app.get('*', function (req, res) {
 

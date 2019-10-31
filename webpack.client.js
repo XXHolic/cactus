@@ -40,7 +40,7 @@ module.exports = env => {
         plugins: [
           new CleanWebpackPlugin(),
           new HtmlWebpackPlugin({
-            title: "",
+            title: "首页",
             template: "./client/index.html",
             minify: {
               //压缩HTML文件

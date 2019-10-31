@@ -11,7 +11,7 @@ export default function renderFullPage({ html, state }) {
   <script>
   window.__INITIAL_STATE__ = ${JSON.stringify(state)};
   </script>
-  <script src="./server-dist/bundle.js"></script>
+  <script src="/index.js"></script>
   </body>
   `;
   return ssrHtml;
