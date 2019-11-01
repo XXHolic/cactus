@@ -13,7 +13,7 @@ module.exports = merge(base, {
   },
   devServer: {
     contentBase: path.resolve(__dirname, distDirec),
-    port: 9000,
+    port: 9001,
     hot: true,
     stats: "errors-only",
     overlay: true, // 如果代码出错，会在浏览器页面弹出“浮动层”。

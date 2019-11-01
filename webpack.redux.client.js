@@ -6,21 +6,21 @@ const distDirec = "client-dist";
 var assetsPath = path.join(__dirname, distDirec);
 
 module.exports = merge(base, {
-  entry: './client-simple/index.js',
+  entry: './redux/client/index.js',
   output: {
       filename: 'client.js',
       path: assetsPath
   },
   devServer: {
     contentBase: path.resolve(__dirname, distDirec),
-    port: 9000,
+    port: 9002,
     hot: true,
     stats: "errors-only",
     overlay: true, // 如果代码出错，会在浏览器页面弹出“浮动层”。
-    historyApiFallback: true,
+    historyApiFallback: false,
     proxy: {
       '/': {
-        target: 'http://localhost:3001',
+        target: 'http://localhost:3002',
         secure: false
       }
     }

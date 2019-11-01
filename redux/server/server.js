@@ -1,19 +1,26 @@
-import express from 'express';
-import React from 'react'
-import Home from '../client-simple/component/Home/index'
-import Header from '../client-simple/component/Header/index'
-import Counter from '../client-simple/component/Counter/index'
-import {renderToString} from 'react-dom/server'
-
+import express from "express";
+import React,{Fragment} from "react";
+import routers from '../routes'
+import { renderToString } from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import Header from '../client/component/Header/index'
 
 const app = express();
 
-app.use(express.static('client-dist'));
+app.use(express.static("client-dist"));
 
-app.get('/',function (req, res) {
-  var home = renderToString(<Home />);
-  var head = renderToString(<Header />);
-  var counter = renderToString(<Counter />);
+app.get("*", function(req, res) {
+  console.info('req.url',req.url);
+  var html = renderToString(
+    <StaticRouter context={{}} location={req.url}>
+        <Fragment>
+        <Header />
+        <div className="container" style={{ marginTop: 70 }}>
+          {routers}
+        </div>
+        </Fragment>
+    </StaticRouter>
+  );
   res.send(`
   <!DOCTYPE html>
   <html lang="en">
@@ -24,17 +31,13 @@ app.get('/',function (req, res) {
       <title>react back render</title>
   </head>
   <body>
-  ${home}
-  ${head}
-      <div id="root">${counter}</div>
+      <div id="root">${html}</div>
       <script src="./client.js"></script>
   </body>
   </html>
   `);
 });
 
-
-
-app.listen(3001,function() {
-  console.log('server start at localhost:3001');
+app.listen(3002, function() {
+  console.log("server start at localhost:3002");
 });

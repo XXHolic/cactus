@@ -47,6 +47,10 @@
     "sim:build:server": "webpack --config webpack.simple.server.js --watch",
     "sim:run:server": "nodemon --inspect ./server-dist/server.js",
     "sim:start:client": "webpack-dev-server --open --config webpack.simple.client.js",
+    "redux": "npm-run-all --parallel redux:**",
+    "redux:build:server": "webpack --config webpack.redux.server.js --watch",
+    "redux:run:server": "nodemon --inspect ./server-dist/server.js",
+    "redux:start:client": "webpack-dev-server --open --config webpack.redux.client.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
