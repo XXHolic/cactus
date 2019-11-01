@@ -19,7 +19,7 @@ class Counter extends React.Component {
   render() {
     return (
       <div style={{ textAlign: "center" }}>
-        <p>{this.state.number}</p>
+        <p>计数器{this.state.number}</p>
         <button
           onClick={this.handleCount}
         >
