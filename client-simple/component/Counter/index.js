@@ -1,24 +1,33 @@
-import React from 'react'
+import React from "react";
 
-class Counter extends React.Component{
+class Counter extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-        number: 0
-    }
+      number: 0
+    };
   }
 
-    render () {
-        return (<div style={{textAlign: 'center'}}>
-            <p>{this.state.number}</p>
-            <button onClick={() => {
-                let {number} = this.state
-                number++;
+  handleCount = () => {
+    let { number } = this.state;
+    number++;
+    this.setState({
+      number
+    });
+  }
 
-                this.setState({number})
-            }}>+</button>
-        </div>)
-    }
+  render() {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <p>{this.state.number}</p>
+        <button
+          onClick={this.handleCount}
+        >
+          +
+        </button>
+      </div>
+    );
+  }
 }
 
-export default Counter
+export default Counter;

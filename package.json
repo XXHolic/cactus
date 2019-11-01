@@ -46,7 +46,7 @@
     "sim": "npm-run-all --parallel sim:**",
     "sim:build:client": "webpack --config webpack.simple.client.js --watch",
     "sim:build:server": "webpack --config webpack.simple.server.js --watch",
-    "sim:run:server": "node --inspect ./server-simple/index.js",
+    "sim:run:server": "nodemon --inspect ./server-dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
