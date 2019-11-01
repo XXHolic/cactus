@@ -60,6 +60,6 @@
   },
   "homepage": "https://github.com/XXHolic/cactus#readme",
   "nodemonConfig": {
-    "ignore": ["client-dist/*", "dist/*", "client-simple/*"]
+    "ignore": ["client-dist/*", "dist/*", "simple/client/*"]
   }
 }

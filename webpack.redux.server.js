@@ -7,7 +7,7 @@ var serverPath = path.join(__dirname,"server-dist");
 
 module.exports = merge(base, {
   target: 'node', // 告诉webpack 打包的是node环境的
-  entry: './simple/server/index.js',
+  entry: './server-simple/index.js',
   output: {
       filename: 'server.js',
       path: serverPath

@@ -1,7 +1,7 @@
 import path from 'path';
 import express from 'express';
 import webpack from 'webpack';
-import config from '../webpack.server.js';
+import config from '../../webpack.server.js';
 import { routes } from './serverRoute';
 import models from './ssrModel';
 import renderFullPage from './renderFullPage';
