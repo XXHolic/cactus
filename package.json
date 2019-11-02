@@ -13,8 +13,10 @@
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-helmet": "^5.2.1",
+    "react-redux": "^7.1.1",
     "react-router": "^5.1.2",
     "redux": "^4.0.4",
+    "redux-saga": "^1.1.1",
     "uid": "0.0.2"
   },
   "devDependencies": {
@@ -50,7 +52,7 @@
     "redux": "npm-run-all --parallel redux:**",
     "redux:build:server": "webpack --config webpack.redux.server.js --watch",
     "redux:run:server": "nodemon --inspect ./server-dist/server.js",
-    "redux:start:client": "webpack-dev-server --open --config webpack.redux.client.js",
+    "redux:start:client": "webpack-dev-server --open 'Opera' --config webpack.redux.client.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -64,6 +66,11 @@
   },
   "homepage": "https://github.com/XXHolic/cactus#readme",
   "nodemonConfig": {
-    "ignore": ["client-dist/*", "dist/*", "simple/client/*"]
+    "ignore": [
+      "client-dist/*",
+      "dist/*",
+      "simple/client/*",
+      "redux/client/*"
+    ]
   }
 }
