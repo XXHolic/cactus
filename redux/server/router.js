@@ -1,13 +1,10 @@
 import React, { Fragment } from "react";
 import { Provider } from "react-redux";
-import { getServerStore } from "../store";
 import { StaticRouter } from "react-router-dom";
 import Header from "../client/component/Header/index";
-import routes from '../routes'
+import {getRouters} from '../routes'
 
-export default function(req) {
-  let context = {};
-  let store = getServerStore();
+export default function({req,store,context}) {
 
   return (
     <Provider store={store}>
@@ -15,7 +12,7 @@ export default function(req) {
         <Fragment>
           <Header />
           <div className="container" style={{ marginTop: 70 }}>
-          {routes}
+          {getRouters()}
           </div>
         </Fragment>
       </StaticRouter>

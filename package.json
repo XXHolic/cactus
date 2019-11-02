@@ -5,6 +5,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
     "@babel/runtime": "^7.6.3",
+    "axios": "^0.19.0",
     "dva": "^2.6.0-beta.14",
     "express-dva-ssr": "^1.0.1",
     "history": "^4.10.1",
@@ -17,6 +18,7 @@
     "react-router": "^5.1.2",
     "redux": "^4.0.4",
     "redux-saga": "^1.1.1",
+    "redux-thunk": "^2.3.0",
     "uid": "0.0.2"
   },
   "devDependencies": {
@@ -48,7 +50,7 @@
     "sim": "npm-run-all --parallel sim:**",
     "sim:build:server": "webpack --config webpack.simple.server.js --watch",
     "sim:run:server": "nodemon --inspect ./server-dist/server.js",
-    "sim:start:client": "webpack-dev-server --open --config webpack.simple.client.js",
+    "sim:start:client": "webpack-dev-server --open 'Opera' --config webpack.simple.client.js",
     "redux": "npm-run-all --parallel redux:**",
     "redux:build:server": "webpack --config webpack.redux.server.js --watch",
     "redux:run:server": "nodemon --inspect ./server-dist/server.js",

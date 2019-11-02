@@ -14,8 +14,8 @@ class Counter extends React.Component{
     }
 }
 // 连接store
-const CounterPage = connect(
+Counter = connect(
     state => state.counter,
     actions
 )(Counter)
-export default CounterPage
+export default Counter
