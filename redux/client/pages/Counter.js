@@ -11,7 +11,7 @@ class Counter extends React.Component{
         return (<div>
             <p>{number}</p>
             <button onClick={increment}>+</button>
-            <div><Link to="/counter/inner">下一级路由</Link></div>
+            {/* <div><Link to="/counter/inner">下一级路由</Link></div> */}
         </div>)
     }
 }
