@@ -8,6 +8,7 @@ import { createMemoryHistory } from "history";
 import models from "./ssrModel";
 import { StaticRouter } from "react-router";
 import { renderToString } from "react-dom/server";
+import Count from '../client/routes/Count';
 // import renderFullPage from './renderFullPage';
 // import runtimeSSRMiddle from './runtimeSSRMiddle';
 
@@ -22,9 +23,9 @@ app.get("*", function(req, res) {
   const app = dva({
     history
   });
-  // models.forEach(model => {
-  //   app.model(model);
-  // });
+  models.forEach(model => {
+    app.model(model);
+  });
 
   app.router(() => (
     <StaticRouter location={req.url} context={context}>
@@ -36,10 +37,14 @@ app.get("*", function(req, res) {
     context
   });
 
-  const curState = appDOM.props.store.getState();
-  const html = renderToString(appDOM);
 
-  res.send(`
+  let promises = [];
+  promises.push(Count.loadData(appDOM.props.store))
+
+  return Promise.all(promises).then(() => {
+    const curState = appDOM.props.store.getState();
+    const html = renderToString(appDOM);
+    res.send(`
   <!DOCTYPE html>
   <html lang="en">
   <head>
@@ -57,6 +62,12 @@ app.get("*", function(req, res) {
   </body>
   </html>
   `);
+  })
+
+
+
+
+
 });
 
 // app.use((error, req, res) => {

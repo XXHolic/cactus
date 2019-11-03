@@ -21,6 +21,11 @@ class Count extends React.Component {
 
 };
 
+Count.loadData = function (props) {
+  // dispatch的返回值就是action
+  return props.dispatch({type: 'count/getList'})
+}
+
 export default connect(({ count }) => ({
   count,
 }))(Count);
