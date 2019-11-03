@@ -1,8 +1,9 @@
 import {renderToString} from 'react-dom/server'
 import getRouter from './router'
 import {routes} from '../routes'
-import { matchPath } from 'react-router-dom'
+// import { matchPath } from 'react-router-dom'
 import { getServerStore } from "../store";
+import { matchRoutes } from 'react-router-config'
 
 export default  function (req, res) {
   const reqUrl = req.url;
@@ -16,16 +17,17 @@ export default  function (req, res) {
   let context = {}
   let store = getServerStore()
       // matchPath 是路由提供的工具方法， 可以用来判断路径和路由是否匹配
-      let matchRoutes = routes.filter( route => (matchPath(req.url, route)))
+      // let matchRoutes = routes.filter( route => (matchPath(req.url, route)))
+      let matchRoute = matchRoutes(routes, req.url)
       let promises = []
       // 遍历需要渲染的模板列表， 看是否需要异步加载数据
-      matchRoutes.map(route => {
+      matchRoute.map(item => {
           // 判断是否需要加载异步数据
-          if (route.loadData) { // 如果需要加载数据，调用其loadData方法
-              promises.push(route.loadData(store))
+          if (item.route.loadData) { // 如果需要加载数据，调用其loadData方法
+              promises.push(item.route.loadData(store))
           }
       })
-      // console.info('req.url',req.url);
+      console.info('req.url',req.url);
 
       return Promise.all(promises).then(() => {
         const router = getRouter({req,store,context});
@@ -50,7 +52,7 @@ export default  function (req, res) {
                 state: ${JSON.stringify(store.getState())}
             }
         </script>
-            <script src="./client.js"></script>
+            <script src="/client.js"></script>
         </body>
         </html>
         `);

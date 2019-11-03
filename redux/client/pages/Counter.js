@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
+import { Link } from 'react-router-dom'
 import actions from '../../store/actions/counter'
 
 class Counter extends React.Component{
@@ -7,9 +8,10 @@ class Counter extends React.Component{
     render () {
       const {number,increment} = this.props;
       // console.info('ddd');
-        return (<div style={{textAlign: 'center'}}>
+        return (<div>
             <p>{number}</p>
             <button onClick={increment}>+</button>
+            <div><Link to="/counter/inner">下一级路由</Link></div>
         </div>)
     }
 }
