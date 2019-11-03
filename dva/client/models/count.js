@@ -1,31 +1,27 @@
 export default {
   namespace: 'count',
-  state: {
-    data: 1
-  },
+  state: 0,
   reducers: {
-    save(state, { payload }) {
-      return { ...state, ...payload };
-    },
+    add  (count) { return count + 1 },
+    minus(count) { return count - 1 },
   },
   effects: {
-    *add({ payload: {  } }, { call, put }) {
-      debugger;
-      yield put({
-        type: 'save',
-        payload: {
-          data: 1
-        },
-      });
-    },
-    *minus({}, { call, put }) {
-      yield put({
-        type: 'save',
-        payload: {
-          data: -1
-        },
-      });
-    },
+    // *add({ payload: {  } }, { call, put }) {
+    //   yield put({
+    //     type: 'save',
+    //     payload: {
+    //       data: 1
+    //     },
+    //   });
+    // },
+    // *minus({}, { call, put }) {
+    //   yield put({
+    //     type: 'save',
+    //     payload: {
+    //       data: -1
+    //     },
+    //   });
+    // },
 
   },
 };

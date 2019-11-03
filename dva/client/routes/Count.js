@@ -12,7 +12,7 @@ class Count extends React.Component {
 
     return (
       <div>
-        <h2>{ count.data }</h2>
+        <h2>{ count }</h2>
         <button key="add" onClick={() => { dispatch({type: 'count/add'})}}>+</button>
         <button key="minus" onClick={() => { dispatch({type: 'count/minus'})}}>-</button>
       </div>

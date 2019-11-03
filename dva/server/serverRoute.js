@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Fragment} from 'react';
 import { Route } from 'react-router';
 import Count from '../client/routes/Count';
 
 export const routes = (
-  <div>
+  <Fragment>
     <Route exact path="/" component={ () => <Count></Count>} />
-  </div>
+  </Fragment>
 );

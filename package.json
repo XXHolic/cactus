@@ -56,6 +56,10 @@
     "redux:build:server": "webpack --config webpack.redux.server.js --watch",
     "redux:run:server": "nodemon --inspect ./server-dist/server.js",
     "redux:start:client": "webpack-dev-server --open 'Opera' --config webpack.redux.client.js",
+    "dva": "npm-run-all --parallel dva:**",
+    "dva:build:server": "webpack --config webpack.dva.server.js --watch",
+    "dva:run:server": "nodemon --inspect ./server-dist/server.js",
+    "dva:start:client": "webpack-dev-server --open 'Opera' --config webpack.dva.client.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

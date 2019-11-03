@@ -1,37 +1,17 @@
 var path = require('path');
-const webpack = require('webpack');
 const nodeExternals = require('webpack-node-externals');
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const merge = require('webpack-merge')
+const base = require('./webpack.base.js')
 
 var serverPath = path.join(__dirname,"server-dist");
 
-module.exports = env =>{
-    return {
-        entry: './server/index.js',
-        output: {
-            publicPath: '/',
-            path: serverPath,
-            filename: 'bundle.js',
-        },
-        externals: [nodeExternals()],
-        mode: env.NODE_ENV,
-        module: {
-          rules: [
-            {
-              test: /\.js$/,
-              exclude: /(node_modules)/,
-              use: {
-                loader: 'babel-loader',
-                options: {
-                  presets: [["@babel/preset-env"], ["@babel/preset-react"]],
-                  plugins: ["@babel/plugin-transform-runtime"]
-                }
-              }
-            }
-          ]
-        },
-        plugins: [
-          new CleanWebpackPlugin()
-        ]
-    }
-  }
+module.exports = merge(base, {
+  target: 'node', // 告诉webpack 打包的是node环境的
+  entry: './dva/server/index.js',
+  output: {
+      filename: 'server.js',
+      path: serverPath
+  },
+  // 负责检测所有引入不得node的核心模块，并且通知webpack不需要将核心代码打入到server.js 文件中去
+  externals: [nodeExternals()],
+})
