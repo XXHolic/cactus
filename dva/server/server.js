@@ -1,9 +1,10 @@
 // import path from 'path';
-import React from 'react';
+import React, {Fragment} from 'react';
 import express from "express";
 import dva from "dva";
 // import webpack from 'webpack';
-import { routes } from "./serverRoute";
+// import { routes } from "./serverRoute";
+import getRouter from '../routes';
 import { createMemoryHistory } from "history";
 import models from "./ssrModel";
 import { StaticRouter } from "react-router";
@@ -29,7 +30,10 @@ app.get("*", function(req, res) {
 
   app.router(() => (
     <StaticRouter location={req.url} context={context}>
-      {routes}
+      <Fragment>
+      {getRouter()}
+      </Fragment>
+
     </StaticRouter>
   ));
 

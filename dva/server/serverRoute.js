@@ -1,5 +1,6 @@
 import React, {Fragment} from 'react';
 import { Route } from 'react-router';
+import getRouter from '../routes';
 import Count from '../client/routes/Count';
 
 export const routes = (

@@ -14,7 +14,7 @@ export default {
           resolve(data);
         });
       })
-      console.info('data',data);
+      // console.info('data',data);
 
       // put({
       //   type: 'save',
