@@ -9,7 +9,7 @@ import { createMemoryHistory } from "history";
 import models from "./ssrModel";
 import { StaticRouter } from "react-router";
 import { renderToString } from "react-dom/server";
-import Count from '../client/routes/Count';
+// import Count from '../client/routes/Count';
 // import renderFullPage from './renderFullPage';
 // import runtimeSSRMiddle from './runtimeSSRMiddle';
 
@@ -18,18 +18,31 @@ const app = express();
 app.use(express.static("client-dist"));
 
 app.get("*", function(req, res) {
+  const URL = req.url;
+
+  if (URL === "/favicon.ico") {
+    res.writeHead(302, {
+      Location: "http://www.xholic.cn/favicon.ico"
+    });
+    res.end();
+    return;
+  }
+
   const history = createMemoryHistory();
-  history.push(req.url);
+  history.push(URL);
   const context = {};
   const app = dva({
     history
   });
+
+  // const modelKey = URL.length>1?URL.slice(1):'home';
+  // app.model(models[modelKey]);
   models.forEach(model => {
     app.model(model);
   });
 
   app.router(() => (
-    <StaticRouter location={req.url} context={context}>
+    <StaticRouter location={URL} context={context}>
       <Fragment>
       {getRouter()}
       </Fragment>
@@ -43,7 +56,7 @@ app.get("*", function(req, res) {
 
 
   let promises = [];
-  promises.push(Count.loadData(appDOM.props.store))
+  // promises.push(Count.loadData(appDOM.props.store))
 
   return Promise.all(promises).then(() => {
     const curState = appDOM.props.store.getState();

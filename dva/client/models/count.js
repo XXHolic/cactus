@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export default {
   namespace: 'count',
-  state: 0,
+  state: 2,
   reducers: {
     add  (count) { return count + 1 },
     minus(count) { return count - 1 },
